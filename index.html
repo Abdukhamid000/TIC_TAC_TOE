@@ -8,17 +8,56 @@
     <title>TIC TAC TOE</title>
   </head>
   <body>
-    <div class="board">
+    <!---------------------------------------     NEW GAME SIDE      ------------------------------------------>
+    <div data-newGameMenu class="new-game-menu">
       <div class="shapes">
-        <img src="./icons/x.svg" alt="" />
-        <img src="./icons/y.svg" alt="" />
+        <img src="./icons/xy.svg" alt="" />
       </div>
       <div class="card">
         <h2>PICK PLAYER 1’S MARK</h2>
         <div class="sides">
-          <button id="side-btn" class="bg">X</button>
-          <button id="side-btn">Y</button>
+          <button id="side-btn" class="bg">
+            <img src="./icons/x (2).svg" alt="" />
+          </button>
+          <button id="side-btn">
+            <img src="./icons/o.svg" alt="" />
+          </button>
         </div>
+        <p style="color: #a8bfc9">REMEMBER : X GOES FIRST</p>
+      </div>
+      <button class="btn-cpu">NEW GAME (VS CPU)</button>
+      <button data-playerModeBtn class="btn-player">
+        NEW GAME (VS PLAYER)
+      </button>
+    </div>
+
+    <!-------------------------------------------      GAME BOARD      ------------------------------------------------>
+    <div class="game-board hide" data-gameBoard>
+      <div class="game-board-operations">
+        <img src="./icons/xy.svg" alt="" />
+        <div class="turn">
+          <img src="./icons/x (2).svg" alt="" width="20px" height="20px" />
+          <span>TURN</span>
+        </div>
+        <div class="undo">
+          <img src="./icons/Group 13.svg" alt="" />
+        </div>
+      </div>
+      <div class="squares x">
+        <div class="cell circle" data-cell></div>
+        <div class="cell x" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+        <div class="cell" data-cell></div>
+      </div>
+      <div class="scores">
+        <div class="xScore"></div>
+        <div class="ties"></div>
+        <div class="oScore"></div>
       </div>
     </div>
     <script src="./app.js"></script>

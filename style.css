@@ -1,13 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;400;500;700&family=Outfit:wght@200;400;600;800&family=Roboto:wght@300;400;500;700&display=swap");
 
-* {
-  padding: 0;
-  margin: 0;
+*,
+*::after,
+*::before {
   box-sizing: border-box;
 }
 
+:root {
+  --cell-size: 140px;
+  --mark-size: calc(var(--cell-size) * 0.65);
+}
+
 body {
-  font-family: "Outfit", "Roboto", "Inconsolata", sans-serif;
+  font-family: "Outfit", sans-serif;
   background: #1a2a33;
   display: flex;
   align-items: center;
@@ -16,7 +21,12 @@ body {
   overflow: hidden;
 }
 
-.board {
+button {
+  cursor: pointer;
+}
+
+.new-game-menu {
+  transition: 2s;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -40,6 +50,16 @@ body {
   color: #a8bfc9;
 }
 
+.card p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  text-align: center;
+  letter-spacing: 0.875px;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
+
 .sides {
   margin: 24px 0 17px 0;
   padding: 9px 8px;
@@ -58,4 +78,176 @@ body {
 
 .bg {
   background: #a8bfc9 !important;
+}
+
+.btn-cpu,
+.btn-player {
+  margin-top: 40px;
+  width: 100%;
+  padding: 17px 25px;
+  background: #f2b137;
+  box-shadow: inset 0px -8px 0px #cc8b13;
+  border-radius: 15px;
+  border: none;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: 1.25px;
+  text-transform: uppercase;
+  color: #1a2a33;
+}
+
+.btn-player {
+  margin-top: 20px;
+  background: #31c3bd;
+  box-shadow: inset 0px -8px 0px #118c87;
+  border-radius: 15px;
+}
+
+.game-board {
+
+}
+
+.game-board-operations {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.game-board .turn {
+  background: #1f3641;
+  box-shadow: inset 0px -4px 0px #10212a;
+  border-radius: 10px;
+  padding: 13px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+}
+
+.game-board .turn span {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #a8bfc9;
+}
+
+.game-board .squares {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.squares .cell {
+  cursor: pointer;
+  width: var(--cell-size);
+  height: var(--cell-size);
+  background: #1f3641;
+  box-shadow: inset 0px -8px 0px #10212a;
+  border-radius: 15px;
+  position: relative;
+}
+
+.squares .cell:not(.cell.x):hover {
+}
+
+.squares .cell:hover .cell.x::before,
+.squares .cell:hover .cell.x::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * 0.25);
+  height: var(--mark-size);
+}
+
+.cell.x,
+.cell.circle {
+  cursor: not-allowed;
+}
+
+.cell.x::before,
+.cell.x::after {
+  background: #31c3bd;
+  border-radius: 3px;
+}
+
+.cell.circle::before,
+.cell.circle::after {
+  background: #f2b137;
+}
+
+.cell.x::before,
+.cell.x::after {
+  left: 43%;
+  top: 18%;
+}
+
+.squares.x .cell:not(.x):not(.circle):hover::before,
+.squares.x .cell:not(.x):not(.circle):hover::after,
+.squares.circle .cell:not(.x):not(.circle):hover::before {
+  border: 2px solid #31c3bd;
+  border-radius: 3px;
+  left: 43%;
+  top: 18%;
+}
+
+.squares.circle .cell:not(.x):not(.circle):hover::before,
+.squares.circle .cell:not(.x):not(.circle):hover::after {
+  border: 2px solid #f2b137;
+}
+
+.cell.x::before,
+.cell.x::after,
+.squares.x .cell:not(.x):not(.circle):hover::before,
+.squares.x .cell:not(.x):not(.circle):hover::after {
+  content: "";
+  position: absolute;
+  width: calc(var(--mark-size) * 0.25);
+  height: var(--mark-size);
+}
+
+.cell.x::before,
+.squares.x .cell:not(.x):not(.circle):hover::before {
+  transform: rotate(45deg);
+}
+
+.cell.x::after,
+.squares.x .cell:not(.x):not(.circle):hover::after {
+  transform: rotate(-45deg);
+}
+
+.cell.circle::before,
+.cell.circle::after,
+.squares.circle .cell:not(.x):not(.circle):hover::before,
+.squares.circle .cell:not(.x):not(.circle):hover::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.cell.circle::before,
+.squares.circle .cell:not(.x):not(.circle):hover::before {
+  width: var(--mark-size);
+  height: var(--mark-size);
+  left: 18%;
+  top: 16%;
+}
+
+.cell.circle::after,
+.squares.circle .cell:not(.x):not(.circle):hover::after {
+  width: calc(var(--mark-size) * 0.6);
+  height: calc(var(--mark-size) * 0.6);
+  background-color: #1f3641;
+  left: 31%;
+  top: 28.5%;
 }
