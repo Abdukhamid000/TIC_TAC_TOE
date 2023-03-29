@@ -11,6 +11,15 @@ const bgEffect = document.querySelector("[data-effect]");
 const winningPlayer = document.querySelector("[data-winning-player]");
 const quitBtn = document.querySelector("[data-quit]");
 const nextRoundBtn = document.querySelector("[data-next-round]");
+const xScore = document.querySelector("[data-xScore]");
+const tieScore = document.querySelector("[data-tieScore]");
+const oScore = document.querySelector("[data-oScore]");
+const drawText = document.querySelector("[data-draw-text]");
+const refreshBtn = document.querySelector("[data-refresh]");
+const drawEffect = document.querySelector("[data-draw-effect]");
+const cancelBtn = document.querySelector("[data-cancel]");
+const restartBtn = document.querySelector("[data-restart]");
+const dataWinningText = document.querySelector("[data-winning-text]");
 
 // --------------------------------   X   CIRCLE CLASSES   ------------------------------------------ //
 
@@ -33,7 +42,9 @@ sideBtns.forEach((btn) => {
       btn.classList.remove("bg");
     });
 
-    if (e.target.tagName === "BUTTON") e.target.classList.add("bg");
+    if (e.target.tagName === "BUTTON") {
+      e.target.classList.add("bg");
+    }
   });
 });
 
@@ -76,27 +87,41 @@ const checkForWin = (currentClass) => {
 };
 
 const drawWinner = (currentClass, cell) => {
-  // cellElements.every((el) => console.log(el.classList.contains(currentClass)));
-  console.log(
-    cellElements.forEach((el) => {
-      if (el && el.classList.contains(currentClass)) {
-        if (currentClass === PLAYER_O_CLASS) {
-          el.classList.add("winningCellBgO");
-        } else {
-          el.classList.add("winningCellBgX");
-        }
+  cellElements.forEach((el) => {
+    if (el && el.classList.contains(currentClass)) {
+      if (currentClass === PLAYER_O_CLASS) {
+        el.classList.add("winningCellBgO");
+      } else {
+        el.classList.add("winningCellBgX");
       }
-    })
-  );
+    }
+  });
 
   bgEffect.classList.replace("hide", "show");
   if (currentClass === PLAYER_X_CLASS) {
     winnerSvg.src = "./icons/winnerX.svg";
+    drawText.textContent = "TAKES THE ROUND";
     winningPlayer.textContent = "PLAYER 1 WINS!";
-    console.log(cell);
   } else {
     winnerSvg.src = "./icons/winnerO.svg";
+    drawText.textContent = "TAKES THE ROUND";
     winningPlayer.textContent = "PLAYER 2 WINS!";
+  }
+};
+
+const incrementScore = (currentClass) => {
+  if (currentClass === PLAYER_X_CLASS) {
+    xScore.textContent = +xScore.textContent + 1;
+  } else {
+    oScore.textContent = +oScore.textContent + 1;
+  }
+};
+
+const isFulledBoard = (currentClass) => {
+  const cells = Array.from(cellElements);
+  if (!checkForWin(currentClass)) {
+    console.log("NO WINNER");
+    return cells.every((el) => el.classList.length === 2);
   }
 };
 
@@ -107,7 +132,17 @@ const handleClick = (e) => {
   placeMark(cell, currentClass);
   if (checkForWin(currentClass)) {
     drawWinner(currentClass, cell);
+    incrementScore(currentClass);
   }
+
+  if (isFulledBoard(currentClass)) {
+    winnerSvg.src = "";
+    bgEffect.classList.replace("hide", "show");
+    drawText.textContent = "ROUND TIED";
+    winningPlayer.textContent = "";
+    tieScore.textContent = +tieScore.textContent + 1;
+  }
+
   changeTurns();
   setHoverClass();
 };
@@ -118,4 +153,41 @@ cellElements.forEach((cell) => {
 
 quitBtn.addEventListener("click", (e) => {
   window.location.reload();
+});
+
+const clearBoard = () => {
+  cellElements.forEach((el) => {
+    el.classList.value = el.classList.value.slice(0, 4);
+  });
+
+  cellElements.forEach((cell) => {
+    cell.addEventListener("click", handleClick, { once: true });
+  });
+
+  bgEffect.classList.replace("show", "hide");
+  xTurn = true;
+  squares.classList.replace(PLAYER_O_CLASS, PLAYER_X_CLASS);
+};
+
+nextRoundBtn.addEventListener("click", (e) => {
+  clearBoard();
+  setHoverClass();
+});
+
+refreshBtn.addEventListener("click", (e) => {
+  drawEffect.classList.replace("hide", "show");
+});
+
+cancelBtn.addEventListener("click", (e) => {
+  drawEffect.classList.replace("show", "hide");
+});
+
+restartBtn.addEventListener("click", () => {
+  drawEffect.classList.replace("show", "hide");
+  clearBoard();
+  xTurn = true;
+  setHoverClass();
+  xScore.textContent = 0;
+  oScore.textContent = 0;
+  tieScore.textContent = 0;
 });

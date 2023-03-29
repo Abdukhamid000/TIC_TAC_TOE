@@ -4,6 +4,8 @@
 *::after,
 *::before {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 :root {
@@ -104,9 +106,6 @@ button {
   border-radius: 15px;
 }
 
-.game-board {
-}
-
 .game-board-operations {
   display: flex;
   align-items: center;
@@ -156,9 +155,6 @@ button {
   box-shadow: inset 0px -8px 0px #10212a;
   border-radius: 15px;
   position: relative;
-}
-
-.squares .cell:not(.cell.x):hover {
 }
 
 .squares .cell:hover .cell.x::before,
@@ -273,6 +269,10 @@ button {
   width: 100vw;
 }
 
+.refresh {
+  cursor: pointer;
+}
+
 .game-status {
   top: 50%;
   transform: translate(0%, -50%);
@@ -308,9 +308,6 @@ button {
   line-height: 50px;
   letter-spacing: 2.5px;
   text-transform: uppercase;
-
-  /* Light Blue */
-
   color: #31c3bd;
 }
 
@@ -345,4 +342,88 @@ button {
 
 .exit button:first-child:hover {
   background: #dbe8ed;
+}
+
+.scores {
+  margin-top: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.scores > div {
+  background: #31c3bd;
+  border-radius: 15px;
+  width: 140px;
+  height: 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.xScore span,
+.oScore span,
+.ties span {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #1a2a33;
+}
+
+.xScore p,
+.oScore p,
+.ties p {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  letter-spacing: 0.875px;
+  color: #1a2a33;
+}
+
+.ties {
+  background: #a8bfc9 !important;
+}
+
+.oScore {
+  background: #f2b137 !important;
+}
+
+@media (max-width: 500px) {
+  .game-board .squares {
+    gap: 10px !important;
+    --mark-size: calc(var(--cell-size) * 0.45);
+  }
+
+  .squares .cell {
+    --cell-size: 100px;
+  }
+
+  .scores > div {
+    width: 100px;
+    height: 50px;
+  }
+
+  .refresh img {
+    width: 40px;
+  }
+
+  .turn {
+    padding: 13px 20px !important;
+  }
+
+  .btn-cpu {
+    font-size: 16px;
+  }
+
+  .sides button {
+    padding: 11px 40px;
+  }
+
+  .btn-player {
+    font-size: 16px;
+  }
 }
