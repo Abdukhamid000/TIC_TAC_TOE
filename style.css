@@ -426,4 +426,12 @@ button {
   .btn-player {
     font-size: 16px;
   }
+
+  .round img {
+    width: 40px;
+  }
+
+  .round span {
+    font-size: 16px;
+  }
 }
