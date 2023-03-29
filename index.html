@@ -36,7 +36,13 @@
       <div class="game-board-operations">
         <img src="./icons/xy.svg" alt="" />
         <div class="turn">
-          <img src="./icons/x (2).svg" alt="" width="20px" height="20px" />
+          <img
+            src="./icons/o.svg"
+            alt=""
+            width="20px"
+            height="20px"
+            id="turnSvg"
+          />
           <span>TURN</span>
         </div>
         <div class="undo">
@@ -58,6 +64,19 @@
         <div class="xScore"></div>
         <div class="ties"></div>
         <div class="oScore"></div>
+      </div>
+    </div>
+    <div class="backgroundEffect hide" data-effect>
+      <div class="game-status">
+        <h2 data-winning-player></h2>
+        <div class="round">
+          <img src="./icons/winnerX.svg" alt="" id="winnerSvg" />
+          <span>TAKES THE ROUND</span>
+        </div>
+        <div class="exit">
+          <button data-quit>QUIT</button>
+          <button data-next-round>NEXT ROUND</button>
+        </div>
       </div>
     </div>
     <script src="./app.js"></script>

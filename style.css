@@ -105,7 +105,6 @@ button {
 }
 
 .game-board {
-
 }
 
 .game-board-operations {
@@ -250,4 +249,100 @@ button {
   background-color: #1f3641;
   left: 31%;
   top: 28.5%;
+}
+
+.winningCellBgX {
+  background-color: #31c3bd !important;
+}
+
+.winningCellBgO,
+.winningCellBgO::after {
+  background-color: #f2b137 !important;
+}
+
+.winningCellBgX.x::after,
+.winningCellBgX.x::before,
+.winningCellBgO.cell::before {
+  background-color: #1f3641;
+}
+
+.backgroundEffect {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+}
+
+.game-status {
+  top: 50%;
+  transform: translate(0%, -50%);
+  width: 100vw;
+  height: 266px;
+  background: #1f3641;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+}
+
+.game-status h2 {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #a8bfc9;
+}
+
+.round {
+  margin-top: 23px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.round span {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 50px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+
+  /* Light Blue */
+
+  color: #31c3bd;
+}
+
+.exit {
+  margin-top: 31px;
+}
+
+.exit button {
+  padding: 15px 17px;
+  background: #f2b137;
+  box-shadow: inset 0px -4px 0px #cc8b13;
+  border-radius: 10px;
+  border: none;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #1a2a33;
+}
+
+.exit button:last-child:hover {
+  background: #ffc860;
+}
+
+.exit button:first-child {
+  margin-right: 16px;
+  background: #a8bfc9;
+  box-shadow: inset 0px -4px 0px #6b8997;
+}
+
+.exit button:first-child:hover {
+  background: #dbe8ed;
 }
