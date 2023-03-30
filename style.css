@@ -79,7 +79,12 @@ button {
 }
 
 .bg {
+  transition: 1s;
   background: #a8bfc9 !important;
+}
+
+.defaultColor {
+  fill: #1a2a33;
 }
 
 .btn-cpu,

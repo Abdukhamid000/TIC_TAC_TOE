@@ -20,6 +20,7 @@ const drawEffect = document.querySelector("[data-draw-effect]");
 const cancelBtn = document.querySelector("[data-cancel]");
 const restartBtn = document.querySelector("[data-restart]");
 const dataWinningText = document.querySelector("[data-winning-text]");
+const btnSvgPaths = document.querySelectorAll("[data-path]");
 
 // --------------------------------   X   CIRCLE CLASSES   ------------------------------------------ //
 
@@ -36,17 +37,19 @@ const WINNING_COMBINATIONS = [
   [2, 4, 6],
 ];
 
-sideBtns.forEach((btn) => {
-  btn.addEventListener("click", (e) => {
-    sideBtns.forEach((btn) => {
-      btn.classList.remove("bg");
-    });
+function addBgToBtn() {
+  sideBtns[1].classList.remove("bg");
+  sideBtns[0].classList.add("bg");
+  btnSvgPaths[0].style.fill = "#1a2a33";
+  btnSvgPaths[1].style.fill = "#a8bfc9";
+}
 
-    if (e.target.tagName === "BUTTON") {
-      e.target.classList.add("bg");
-    }
-  });
-});
+function addBgToBtn2() {
+  btnSvgPaths[0].style.fill = "#a8bfc9";
+  btnSvgPaths[1].style.fill = "#1a2a33";
+  sideBtns[0].classList.remove("bg");
+  sideBtns[1].classList.add("bg");
+}
 
 playerModeBtn.addEventListener("click", () => {
   newGameMenu.classList.add("hide");
@@ -87,7 +90,7 @@ const checkForWin = (currentClass) => {
 };
 
 const drawWinner = (currentClass, cell) => {
-  cellElements.forEach((el) => {
+  cell.forEach((el) => {
     if (el && el.classList.contains(currentClass)) {
       if (currentClass === PLAYER_O_CLASS) {
         el.classList.add("winningCellBgO");
