@@ -90,7 +90,7 @@ const checkForWin = (currentClass) => {
 };
 
 const drawWinner = (currentClass, cell) => {
-  cell.forEach((el) => {
+  cellElements.forEach((el) => {
     if (el && el.classList.contains(currentClass)) {
       if (currentClass === PLAYER_O_CLASS) {
         el.classList.add("winningCellBgO");
